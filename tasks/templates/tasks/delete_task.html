@@ -3,19 +3,19 @@
 {% block body %}
 
 <div>
-    <div class="card w-50 mx-auto mt-4 shadow-lg p-3 mb-3 bg-white rounded">
-        <div class="card-header">
+    <div class="card mt-4 shadow-lg mb-3 bg-white rounded">
+        <div class="card-header p-3">
             <h3 class="font-weight-bold">Todo Application</h3>
         </div>
         <div class="card-body">
             <h5 class="card-title">
                 <form method="POST" action="">
                     {% csrf_token %}
-                    <div class="row">
+                    <div class="row container mb-3">
                         <h3>Are you sure you want to delete "{{task.title}}"</h3>
                     </div>
-                    <input type="submit" class="btn btn-sm btn-info my-2" href="/" value="Cancel" />
-                    <input type="submit" class="btn btn-sm btn-danger my-2" href="/" value="Delete" />
+                    <a class="btn btn-sm btn-info my-2" href="{% url 'index' %}" >Cancel</a>
+                    <input type="submit" class="btn btn-sm btn-danger my-2" href="{% url 'delete' task.id %}" value="Delete" />
                 </form>
             </h5>
         </div>

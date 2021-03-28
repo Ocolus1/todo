@@ -3,15 +3,17 @@
 {% block body %}
 
 <div>
-    <div class="card w-50 mx-auto mt-4 shadow-lg p-3 mb-3 bg-white rounded">
-        <div class="card-header">
+    <div class="card mt-4 shadow-lg  mb-3 bg-white rounded">
+        <div class="card-header p-3">
             <h3 class="font-weight-bold">Todo Application</h3>
         </div>
         <div class="card-body">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                Add Task <span class="font-weight-bold h-5">+</span>
-            </button>
+            <div class="p-2">
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                    Add Task <span class="font-weight-bold h-5">+</span>
+                </button>
+            </div>
             <hr />
 
             <!-- Modal -->
@@ -30,16 +32,25 @@
                                 <h5 class="card-title">
                                     {% csrf_token %}
                                     <div class="row">
-                                        {{form.title}}
-                                        <div class="form-check mt-3">
-                                            {{form.completed}} <span class="font-weight-bold">Completed</span>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter your task">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check mt-3">
+                                                <input class="form-check-input" name="completed" type="checkbox" 
+                                                value="True" id="flexCheckChecked" >
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    <span class="font-weight-bold">Completed</span>
+                                                </label>
+                                              </div>
                                         </div>
                                     </div>
                                 </h5>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <!-- <button type="submit" class="btn btn-primary">Save</button> -->
                                 <input type="submit" class="btn btn-primary" value="Save" />
                             </div>
                         </form>
@@ -48,19 +59,31 @@
             </div>
             {% for task in tasks %}
             {% if task.completed == True %}
-            <div class="card-text shadow-lg p-3 mb-3 bg-white rounded align-middle d-flex justify-content-between">
-                <strike>{{task}}</strike>
-                <div>
-                    <a href="{% url 'update' task.id %}" class="btn btn-sm btn-info mb-2">Update</a>
-                    <a href="{% url 'delete' task.id %}" class="btn btn-sm btn-danger mb-2">Delete</a>
+            <div class="card-text shadow-lg p-3 mb-3 bg-white rounded ">
+                <div class="row d_row">
+                    <div class="d_text">
+                        <strike>{{task.title}}</strike>
+                    </div>
+                    <div class="d_btn">
+                        <div>
+                            <a href="{% url 'update' task.id %}" class="btn btn-sm btn-info mb-2">Update</a>
+                            <a href="{% url 'delete' task.id %}" class="btn btn-sm btn-danger mb-2">Delete</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             {%else%}
-            <div class="card-text shadow-lg p-3 mb-3 bg-white rounded align-middle d-flex justify-content-between">
-                <span>{{task}}</span>
-                <div>
-                    <a href="{% url 'update' task.id %}" class="btn btn-sm btn-info mb-2">Update</a>
-                    <a href="{% url 'delete' task.id %}" class="btn btn-sm btn-danger mb-2">Delete</a>
+            <div class="card-text shadow-lg p-3 mb-3 bg-white rounded ">
+                <div class="row d_row">
+                    <div class="d_text">
+                        <span>{{task.title}}</span>
+                    </div>
+                    <div class="d_btn">
+                        <div>
+                            <a href="{% url 'update' task.id %}" class="btn btn-sm btn-info mb-2">Update</a>
+                            <a href="{% url 'delete' task.id %}" class="btn btn-sm btn-danger mb-2">Delete</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endif %}
