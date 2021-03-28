@@ -34,7 +34,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter your task">
+                                                <input type="text" class="form-control" name="title" 
+                                                id="title" placeholder="Enter your task" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -58,6 +59,8 @@
                 </div>
             </div>
             {% for task in tasks %}
+            {% if task.title == ' ' %}
+            {%else%}
             {% if task.completed == True %}
             <div class="card-text shadow-lg p-3 mb-3 bg-white rounded ">
                 <div class="row d_row">
@@ -86,6 +89,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             {% endif %}
             {% endfor %}
         </div>
